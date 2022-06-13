@@ -2,7 +2,6 @@ package cards;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
 import org.testng.annotations.Test;
 import java.util.HashMap;
 import static io.restassured.RestAssured.given;
