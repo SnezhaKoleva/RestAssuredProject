@@ -36,7 +36,7 @@ public class cardTest {
     @Test(priority = 2)
     public void checkCard() {
 
-        final ValidatableResponse body = given().contentType("application/json")
+        given().contentType("application/json")
                 .header("apikey", apiKey)
                 .when().get(URI + "/"+cardID)
                 .then().statusCode(200)
