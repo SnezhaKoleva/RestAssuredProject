@@ -37,9 +37,9 @@ public class cardTest {
 
         final ValidatableResponse body = given().contentType("application/json")
                 .header("apikey", apiKey)
-                .when().get(URI + "/139")
+                .when().get(URI + "/141")
                 .then().statusCode(200)
-                .body("data.card_id",equalTo(139))
+                .body("data.card_id",equalTo(141))
                 .body("data.title", equalTo("Try 1"))
                 .body("data.column_id", equalTo(7))
                 .log().body();
@@ -51,12 +51,12 @@ public class cardTest {
         HashMap<String,String> jsObj = new HashMap<>();
         jsObj.put("boardid","1");
         jsObj.put("column_id","8");
-        jsObj.put("taskid","94");
+        jsObj.put("taskid","141");
 
         given().contentType("application/json")
                 .header("apikey",apiKey)
                 .body(jsObj)
-                .when().patch(URI+"/94")
+                .when().patch(URI+"/141")
                 .then()
                 .statusCode(200).log().body();
     }
@@ -65,7 +65,7 @@ public class cardTest {
 
         given().contentType("application/json")
                 .header("apikey",apiKey)
-                .when().get(URI+"/94")
+                .when().get(URI+"/141")
                 .then()
                 .body("data.column_id",equalTo(8))
                 .statusCode(200)
@@ -76,12 +76,12 @@ public class cardTest {
 
         HashMap<String,String> jsObj = new HashMap<>();
         jsObj.put("boardid","1");
-        jsObj.put("taskid","132");
+        jsObj.put("taskid","141");
 
         given().contentType("application/json")
                 .header("apikey",apiKey)
                 .body(jsObj)
-                .when().delete(URI+"/91")
+                .when().delete(URI+"/141")
                 .then().log().body().statusCode(204);
 
     }
@@ -89,7 +89,7 @@ public class cardTest {
     public void checkTheDelete() {
         given().contentType("application/json")
                 .header("apikey", apiKey)
-                .when().delete(URI + "/132")
+                .when().delete(URI + "/141")
                 .then().statusCode(204);
 
     }
