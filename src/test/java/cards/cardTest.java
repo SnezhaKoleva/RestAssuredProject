@@ -10,8 +10,9 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class cardTest {
 
-    public String URI = "https://studentj7.kanbanize.com/api/v2/cards";
-    public String apiKey = "jinthBEt7dblJ1UjXCkMkMsf1rl83XuJdwCDaate";
+    private String URI = "https://studentj7.kanbanize.com/api/v2/cards";
+    private String apiKey = "t3a6xFky1eoEsh68JKV4tuH099DOxf5S0UWz88MW";
+    private int cardID = 147;
 
     @Test(priority = 1)
     public void createCard() {
@@ -28,18 +29,18 @@ public class cardTest {
                         extract().response();
 
 
-//        JsonPath jsonPath = res.jsonPath();
-//        Integer cardId = jsonPath.get("card_id");
-//        System.out.println(cardId + " - card ID");
+        JsonPath jsonPath = res.jsonPath();
+        Integer cardID = jsonPath.get("card_id");
+        System.out.println(cardID + " - card ID");
     }
     @Test(priority = 2)
     public void checkCard() {
 
         final ValidatableResponse body = given().contentType("application/json")
                 .header("apikey", apiKey)
-                .when().get(URI + "/141")
+                .when().get(URI + "/"+cardID)
                 .then().statusCode(200)
-                .body("data.card_id",equalTo(141))
+                .body("data.card_id",equalTo(cardID))
                 .body("data.title", equalTo("Try 1"))
                 .body("data.column_id", equalTo(7))
                 .log().body();
@@ -51,12 +52,12 @@ public class cardTest {
         HashMap<String,String> jsObj = new HashMap<>();
         jsObj.put("boardid","1");
         jsObj.put("column_id","8");
-        jsObj.put("taskid","141");
+        jsObj.put("taskid","cardID");
 
         given().contentType("application/json")
                 .header("apikey",apiKey)
                 .body(jsObj)
-                .when().patch(URI+"/141")
+                .when().patch(URI+"/"+cardID)
                 .then()
                 .statusCode(200).log().body();
     }
@@ -65,7 +66,7 @@ public class cardTest {
 
         given().contentType("application/json")
                 .header("apikey",apiKey)
-                .when().get(URI+"/141")
+                .when().get(URI+"/"+cardID)
                 .then()
                 .body("data.column_id",equalTo(8))
                 .statusCode(200)
@@ -76,12 +77,12 @@ public class cardTest {
 
         HashMap<String,String> jsObj = new HashMap<>();
         jsObj.put("boardid","1");
-        jsObj.put("taskid","141");
+        jsObj.put("taskid","cardID");
 
         given().contentType("application/json")
                 .header("apikey",apiKey)
                 .body(jsObj)
-                .when().delete(URI+"/141")
+                .when().delete(URI+"/"+cardID)
                 .then().log().body().statusCode(204);
 
     }
@@ -89,7 +90,7 @@ public class cardTest {
     public void checkTheDelete() {
         given().contentType("application/json")
                 .header("apikey", apiKey)
-                .when().delete(URI + "/141")
+                .when().delete(URI + "/"+cardID)
                 .then().statusCode(204);
 
     }
