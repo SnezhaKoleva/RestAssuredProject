@@ -31,6 +31,7 @@ public class cardTest {
         JsonPath jsonPath = res.jsonPath();
         Integer cardID = jsonPath.get("card_id");
         System.out.println(cardID + " - card ID");
+
     }
     @Test(priority = 2)
     public void checkCard() {
@@ -40,8 +41,10 @@ public class cardTest {
                 .when().get(URI + "/"+cardID)
                 .then().statusCode(200)
                 .body("data.card_id",equalTo(cardID))
-                .body("data.title", equalTo("Try 1"))
                 .body("data.column_id", equalTo(7))
+                .body("data.lane_id",equalTo(2))
+                .body("data.title", equalTo("Try 1"))
+                .body("data.color",equalTo("77569b"))
                 .log().body();
     }
 
