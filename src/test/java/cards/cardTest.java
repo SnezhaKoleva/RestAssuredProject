@@ -92,8 +92,8 @@ public class cardTest {
     public void checkTheDelete() {
         given().contentType("application/json")
                 .header("apikey", apiKey)
-                .when().delete(URI + "/"+cardID)
-                .then().statusCode(204);
+                .when().get(URI + "/"+cardID)
+                .then().statusCode(404);
 
     }
 }
